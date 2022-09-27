@@ -1,5 +1,5 @@
 import random
-from re import S
+from re import S, T
 
 def load_word():
     '''
@@ -26,7 +26,11 @@ def is_word_guessed(secret_word, letters_guessed):
         bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
     '''
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
-    pass
+    for letter in secret_word:
+        if letter not in letters_guessed:
+            return False
+    return True
+    
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -53,8 +57,11 @@ def is_guess_in_word(guess, secret_word):
         bool: True if the guess is in the secret_word, False otherwise
     '''
     #TODO: check if the letter guess is in the secret word
-
-    pass
+    if guess in secret_word:
+        return True
+    else:
+        return False
+    
 
 
 
@@ -86,6 +93,17 @@ def spaceman(secret_word):
             return
 
         #TODO: Check if the guessed letter is in the secret or not and give the player feedback
+        if is_guess_in_word(guess, secret_word):
+            print("Your guess appears in the word!")
+        else:
+            print("Sorry, your guess was not in the word. Try again!")
+            remaining_incorrect_guesses -= 1
+            if remaining_incorrect_guesses > 0:
+                print(f'You have {remaining_incorrect_guesses} left.')
+            else:
+                print("Sorry, you didn't win.  Try again!")
+                print(f"The word was: {secret_word}")
+                return
 
         #TODO: show the guessed word so far
 

@@ -31,6 +31,14 @@ def is_word_guessed(secret_word, letters_guessed):
             return False
     return True
     
+def is_repeat_guess(guess, letters_guessed, letters_not_guessed):
+    # Check if the letter has already been guessed
+    if guess in letters_guessed:
+        return True
+    else:
+        letters_guessed.append(guess)
+        letters_not_guessed.remove(guess)
+        return False
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -87,8 +95,11 @@ def spaceman(secret_word):
     while not is_word_guessed(secret_word, letters_guessed):
         #Ask the player to guess one letter per round (and check that it is only one letter)
         guess = input("Enter a letter: ")
-        letters_guessed.append(guess)
-        letters_not_guessed.remove(guess)
+        
+        # Check if the user has already guessed that letter
+        if is_repeat_guess(guess, letters_guessed, letters_not_guessed):
+            continue
+
 
         # Check if the user has guessed all of the correct letters, if so, tell them they have won
         if is_word_guessed(secret_word, letters_guessed):
@@ -115,8 +126,7 @@ def spaceman(secret_word):
         print(f"These letters haven't been guessed yet: {letters_not_guessed}")
 
 
-#These function calls that will start the game
+# These function calls start the game
 secret_word = load_word()
-print(secret_word)
+# print(secret_word)
 spaceman(secret_word)
-# ...-m "built the letters_not_guessed functionality"

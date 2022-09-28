@@ -98,8 +98,8 @@ def spaceman(secret_word):
         
         # Check if the user has already guessed that letter
         if is_repeat_guess(guess, letters_guessed, letters_not_guessed):
+            print('You previously guessed that letter. Guess again!')
             continue
-
 
         # Check if the user has guessed all of the correct letters, if so, tell them they have won
         if is_word_guessed(secret_word, letters_guessed):
@@ -123,7 +123,11 @@ def spaceman(secret_word):
 
         # Show the letters that have been guessed correctly so far 
         print(get_guessed_word(secret_word, letters_guessed))
-        print(f"These letters haven't been guessed yet: {letters_not_guessed}")
+        # Show the letters that haven't been guessed yet
+        letters_not_guessed_str = ''
+        for letter in letters_not_guessed:
+            letters_not_guessed_str = letters_not_guessed_str + letter
+        print(f"These letters haven't been guessed yet: {letters_not_guessed_str}")
 
 
 # These function calls start the game

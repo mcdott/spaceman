@@ -93,8 +93,11 @@ def spaceman(secret_word):
     print("You're allowed 7 incorrect guesses.  Please enter one letter per round.")
 
     while not is_word_guessed(secret_word, letters_guessed):
-        #Ask the player to guess one letter per round (and check that it is only one letter)
-        guess = input("Enter a letter: ")
+        #Ask the player to guess one letter per round and check that it is only one letter
+        while True:
+            guess = input("Enter a letter: ")
+            if len(guess) == 1:
+                break
         
         # Check if the user has already guessed that letter
         if is_repeat_guess(guess, letters_guessed, letters_not_guessed):
